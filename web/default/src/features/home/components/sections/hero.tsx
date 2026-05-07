@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Terminal, Cpu, Zap } from 'lucide-react'
+import { motion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
-import { useSystemConfig } from '@/hooks/use-system-config'
 import { Button } from '@/components/ui/button'
 import { HeroTerminalDemo } from '../hero-terminal-demo'
 
@@ -12,87 +12,127 @@ interface HeroProps {
 
 export function Hero(props: HeroProps) {
   const { t } = useTranslation()
-  const { systemName } = useSystemConfig()
 
   return (
     <section className='relative z-10 flex flex-col items-center overflow-hidden px-6 pt-28 pb-16 md:pt-36 md:pb-24'>
-      {/* Radial gradient background */}
-      <div
-        aria-hidden
-        className='pointer-events-none absolute inset-0 -z-10 opacity-25 dark:opacity-[0.12]'
-        style={{
-          background: [
-            'radial-gradient(ellipse 60% 50% at 20% 20%, oklch(0.72 0.18 250 / 80%) 0%, transparent 70%)',
-            'radial-gradient(ellipse 50% 40% at 80% 15%, oklch(0.65 0.15 200 / 60%) 0%, transparent 70%)',
-            'radial-gradient(ellipse 40% 35% at 40% 80%, oklch(0.70 0.12 280 / 40%) 0%, transparent 70%)',
-          ].join(', '),
-        }}
-      />
-      {/* Grid pattern */}
-      <div
-        aria-hidden
-        className='absolute inset-0 -z-10 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_30%,black_20%,transparent_100%)] bg-[size:4rem_4rem] opacity-[0.08]'
-      />
+      <div className='pointer-events-none absolute inset-0 -z-10'>
+        <div className='absolute inset-0 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_35%,black_30%,transparent_100%)] bg-[size:3rem_3rem] opacity-[0.1]' />
+        <motion.div
+          animate={{
+            top: ['0%', '100%'],
+            opacity: [0, 0.35, 0],
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: 'linear',
+          }}
+          className='via-primary/60 absolute left-0 h-px w-full bg-linear-to-r from-transparent to-transparent'
+        />
+      </div>
 
-      <div className='flex max-w-3xl flex-col items-center text-center'>
-        <h1
-          className='landing-animate-fade-up text-[clamp(2rem,5.5vw,3.5rem)] leading-[1.15] font-bold tracking-tight'
-          style={{ animationDelay: '0ms' }}
+      <div className='flex max-w-4xl flex-col items-center text-center'>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className='border-border/60 bg-muted/40 text-muted-foreground mb-6 flex items-center gap-2 rounded-full border px-4 py-1.5 text-[10px] font-bold tracking-widest uppercase backdrop-blur-md'
         >
-          {t('Unified API Gateway for')}
+          <Zap className='size-3' />
+          {t('Next-Generation API Infrastructure')}
+        </motion.div>
+
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className='text-4xl leading-tight font-black tracking-tight sm:text-5xl md:text-6xl'
+        >
+          {t('Sync Your AI with')}
           <br />
-          <span className='bg-gradient-to-r from-blue-400 via-violet-400 to-purple-500 bg-clip-text text-transparent'>
-            {t('All Your AI Models')}
+          <span className='from-primary via-foreground to-primary bg-gradient-to-b bg-clip-text text-transparent italic'>
+            SyncAPI
           </span>
-        </h1>
-        <p
-          className='landing-animate-fade-up text-muted-foreground/80 mt-5 max-w-lg text-base leading-relaxed opacity-0 md:text-lg'
-          style={{ animationDelay: '80ms' }}
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className='text-muted-foreground/80 mt-6 max-w-2xl text-base leading-relaxed md:text-xl'
         >
-          {systemName}{' '}
           {t(
-            'is an open-source AI API gateway for self-hosted deployments. Connect multiple upstream services, manage models, keys, quotas, logs, and routing policies in one place.'
+            'The enterprise-grade gateway for professional AI operations. Aggregate, monitor, and scale your LLM infrastructure with cryptographic security and sub-millisecond latency.'
           )}
-        </p>
-        <div
-          className='landing-animate-fade-up mt-8 flex items-center gap-3 opacity-0'
-          style={{ animationDelay: '160ms' }}
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className='mt-10 flex flex-wrap items-center justify-center gap-4'
         >
           {props.isAuthenticated ? (
             <Button
-              className='group rounded-lg'
+              size='lg'
+              className='relative overflow-hidden px-8 font-semibold'
               render={<Link to='/dashboard' />}
             >
-              {t('Go to Dashboard')}
-              <ArrowRight className='ml-1 size-3.5 transition-transform duration-200 group-hover:translate-x-0.5' />
+              <span className='relative z-10 flex items-center gap-2'>
+                {t('Enter Console')}
+                <ArrowRight
+                  data-icon='inline-end'
+                  className='transition-transform group-hover/button:translate-x-1'
+                />
+              </span>
+              <motion.div
+                animate={{ opacity: [0.2, 0.5, 0.2] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className='bg-primary-foreground/10 absolute inset-0'
+              />
             </Button>
           ) : (
             <>
               <Button
-                className='group rounded-lg'
+                size='lg'
+                className='relative overflow-hidden px-8 font-semibold'
                 render={<Link to='/sign-up' />}
               >
-                {t('Get Started')}
-                <ArrowRight className='ml-1 size-3.5 transition-transform duration-200 group-hover:translate-x-0.5' />
+                <span className='relative z-10 flex items-center gap-2'>
+                  <Terminal data-icon='inline-start' />
+                  {t('Get API Access')}
+                </span>
+                <motion.div
+                  animate={{ opacity: [0, 0.3, 0] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className='bg-primary-foreground/10 absolute inset-0'
+                />
               </Button>
               <Button
+                size='lg'
                 variant='outline'
-                className='border-border/50 hover:border-border hover:bg-muted/50 rounded-lg'
+                className='px-8 font-semibold backdrop-blur-sm'
                 render={<Link to='/pricing' />}
               >
-                {t('View Pricing')}
+                <span className='flex items-center gap-2'>
+                  {t('View Capability')}
+                  <Cpu data-icon='inline-end' className='opacity-50' />
+                </span>
               </Button>
             </>
           )}
-        </div>
+        </motion.div>
       </div>
 
-      <div
-        className='landing-animate-fade-up w-full opacity-0'
-        style={{ animationDelay: '300ms' }}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.7, delay: 0.5 }}
+        className='relative mt-16 w-full max-w-5xl'
       >
+        <div className='from-primary/10 absolute -inset-1 rounded-lg bg-gradient-to-b to-transparent opacity-50 blur-2xl' />
         <HeroTerminalDemo />
-      </div>
+      </motion.div>
     </section>
   )
 }

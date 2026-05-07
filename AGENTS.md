@@ -3,6 +3,7 @@
 ## Overview
 
 This is an AI API gateway/proxy built with Go. It aggregates 40+ upstream AI providers (OpenAI, Claude, Gemini, Azure, AWS Bedrock, etc.) behind a unified API, with user management, billing, rate limiting, and an admin dashboard.
+It is named SyncAPI.
 
 ## Tech Stack
 
@@ -135,3 +136,31 @@ For request structs that are parsed from client JSON and then re-marshaled to up
 ### Rule 7: Billing Expression System — Read `pkg/billingexpr/expr.md`
 
 When working on tiered/dynamic billing (expression-based pricing), you MUST read `pkg/billingexpr/expr.md` first. It documents the design philosophy, expression language (variables, functions, examples), full system architecture (editor → storage → pre-consume → settlement → log display), token normalization rules (`p`/`c` auto-exclusion), quota conversion, and expression versioning. All code changes to the billing expression system must follow the patterns described in that document.
+
+## Personal Requirements
+
+When I ask a question, think deeper. Noting that my native language is Chinese. ***Generally, reply in Traditional Chinese unless the vocab it is not translatable*** because sometimes I would be lazy to type in Chinese.
+
+When there are new requirements, *briefly state what you are going to do in both plain language and a professional tone* before taking any action (except searching or reading files). This acts as a lightweight always-on plan mode — explicit plan mode is too cumbersome to invoke every time. It ensures you have correctly understood my intent. ***Always tell me what you intend to do first.***
+
+Do not run smallest-scope analysis proactively (e.g., `flutter analyze` or any targeted analyze), because this app is too large and it takes forever. Only run analysis when I explicitly ask.You don't need to run "flutter format" if you think it's needed, tell me.
+
+Do not create any md files unless I tell you to, instead, tell me directly.
+
+For backend errors, use the red-styled custom error dialog, save the error message to the error log, and surface it in the Developer Options Error Logs page.
+
+If there is a to-do needed for the app, like if I say I need to do something later, add it to **`to-do.md`** (project root).
+
+Tone: Ensure all responses are strictly fact-based, rational, and objective. Avoid flattery or people-pleasing language.
+
+Address Protocol: Always address me exclusively as "Operator" to maintain a cold, system-level, and inorganic interaction. Avoid conventional pronouns or conversational fillers.
+
+Ask me questions before answering.
+Requirement: Ask only one question at a time, and follow up with further questions based on my answer. You can only begin working on this topic when you are 95% confident that I understand your true needs and goals.
+After finished a modification, ***immediately update `changelogs/<major>/<current_version>.md` with what was changed (files, content, reason)***
+
+Encoding Safety : On Windows PowerShell 5.1, never use bare Get-Content/Set-Content/Out-File or shell redirection (>, >>) for files that may contain non-ASCII text (Chinese/Japanese/Korean). apply_patch writes UTF-8 content, so every verification read must use explicit UTF-8, e.g. Get-Content -Raw -Encoding utf8 <path> (or [System.IO.File]::ReadAllText(<path>, [System.Text.UTF8Encoding]::new($false))). All writes must also specify UTF-8 explicitly. If any garbled text appears, treatit as an encoding failure, re-read with explicit UTF-8, and do not continue based on corrupted output.
+
+**Do not save token for me, think as deep as you can to ensure no bugs going out.**
+
+**Claude Code and superviser would review your work after commit.**

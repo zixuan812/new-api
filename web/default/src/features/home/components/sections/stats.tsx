@@ -1,4 +1,5 @@
 import { useRef, useEffect, useCallback } from 'react'
+import { motion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 
 interface CounterProps {
@@ -80,28 +81,51 @@ export function Stats(_props: StatsProps) {
   const { t } = useTranslation()
 
   const stats: StatItem[] = [
-    { end: 50, suffix: '+', label: t('upstream services integrated') },
-    { end: 100, suffix: '+', label: t('model billing support') },
-    { end: 50, suffix: '+', label: t('compatible API routes') },
-    { end: 10, suffix: '+', label: t('scheduling controls') },
+    { end: 50, suffix: '+', label: t('Upstream Nodes') },
+    { end: 100, suffix: '+', label: t('Model Billing Modes') },
+    { end: 50, suffix: '+', label: t('API Protocols') },
+    { end: 10, suffix: '+', label: t('Safety Policies') },
   ]
 
   return (
-    <div className='border-border/40 bg-muted/10 relative z-10 border-y'>
-      <div className='mx-auto max-w-6xl px-6 py-10 md:py-12'>
-        <div className='grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-12'>
-          {stats.map((s) => (
-            <div
+    <div className='border-border/40 bg-muted/20 relative z-10 border-y backdrop-blur-sm'>
+      <div
+        className='absolute inset-0 -z-10 opacity-[0.03]'
+        style={{
+          backgroundImage:
+            'radial-gradient(circle, var(--foreground) 1px, transparent 1px)',
+          backgroundSize: '1rem 1rem',
+        }}
+      />
+
+      <div className='mx-auto max-w-6xl px-6 py-12 md:py-16'>
+        <div className='grid grid-cols-2 gap-12 md:grid-cols-4 md:gap-16'>
+          {stats.map((s, i) => (
+            <motion.div
               key={s.label}
-              className='flex flex-col items-center text-center'
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+              className='group flex flex-col items-center text-center'
             >
-              <span className='text-2xl font-bold tracking-tight md:text-3xl'>
-                <Counter end={s.end} suffix={s.suffix} decimals={s.decimals} />
-              </span>
-              <span className='text-muted-foreground mt-1.5 text-xs'>
+              <div className='relative'>
+                <span className='from-foreground to-foreground/60 bg-gradient-to-b bg-clip-text text-3xl font-black tracking-tight text-transparent md:text-5xl'>
+                  <Counter
+                    end={s.end}
+                    suffix={s.suffix}
+                    decimals={s.decimals}
+                  />
+                </span>
+                <motion.div
+                  initial={{ width: 0 }}
+                  whileInView={{ width: '100%' }}
+                  className='bg-primary/30 absolute -bottom-2 left-0 h-px'
+                />
+              </div>
+              <span className='text-muted-foreground/60 group-hover:text-primary/60 mt-6 text-[10px] font-bold tracking-[0.2em] uppercase transition-colors'>
                 {s.label}
               </span>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
