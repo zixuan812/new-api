@@ -179,7 +179,14 @@ export function Dashboard() {
 
   return (
     <SectionPageLayout>
-      <SectionPageLayout.Title>{t(meta.titleKey)}</SectionPageLayout.Title>
+      <SectionPageLayout.Title>
+        <span className='inline-flex min-w-0 items-baseline gap-2'>
+          <span>SyncAPI</span>
+          <span className='text-muted-foreground truncate text-sm font-medium'>
+            {t(meta.titleKey)}
+          </span>
+        </span>
+      </SectionPageLayout.Title>
       <SectionPageLayout.Description>
         {t(meta.descriptionKey)}
       </SectionPageLayout.Description>

@@ -52,6 +52,14 @@ export function getSystemName() {
   return system_name;
 }
 
+export function getSyncAPIDisplayName(name) {
+  const baseName = name?.trim() || 'New API';
+  if (baseName.toLowerCase().includes('syncapi')) {
+    return baseName;
+  }
+  return `${baseName} / SyncAPI`;
+}
+
 export function getLogo() {
   let logo = localStorage.getItem('logo');
   if (!logo) return '/logo.png';

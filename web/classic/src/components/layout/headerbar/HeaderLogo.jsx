@@ -20,6 +20,7 @@ For commercial licensing, please contact support@quantumnous.com
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Typography, Tag } from '@douyinfe/semi-ui';
+import { getSyncAPIDisplayName } from '../../../helpers';
 import SkeletonWrapper from '../components/SkeletonWrapper';
 
 const HeaderLogo = ({
@@ -36,6 +37,7 @@ const HeaderLogo = ({
   if (isMobile && isConsoleRoute) {
     return null;
   }
+  const displaySystemName = getSyncAPIDisplayName(systemName);
 
   return (
     <Link to='/' className='group flex items-center gap-2'>
@@ -59,7 +61,7 @@ const HeaderLogo = ({
               heading={4}
               className='!text-lg !font-semibold !mb-0'
             >
-              {systemName}
+              {displaySystemName}
             </Typography.Title>
           </SkeletonWrapper>
           {(isSelfUseMode || isDemoSiteMode) && !isLoading && (

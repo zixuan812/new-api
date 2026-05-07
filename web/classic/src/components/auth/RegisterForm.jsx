@@ -27,6 +27,7 @@ import {
   showSuccess,
   updateAPI,
   getSystemName,
+  getSyncAPIDisplayName,
   getOAuthProviderIcon,
   setUserData,
   onDiscordOAuthClicked,
@@ -112,7 +113,7 @@ const RegisterForm = () => {
   const githubButtonText = t(githubButtonTextKeyByState[githubButtonState]);
 
   const logo = getLogo();
-  const systemName = getSystemName();
+  const systemName = getSyncAPIDisplayName(getSystemName());
 
   let affCode = new URLSearchParams(window.location.search).get('aff');
   if (affCode) {

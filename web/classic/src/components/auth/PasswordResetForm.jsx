@@ -25,6 +25,7 @@ import {
   showInfo,
   showSuccess,
   getSystemName,
+  getSyncAPIDisplayName,
 } from '../../helpers';
 import Turnstile from 'react-turnstile';
 import { Button, Card, Form, Typography } from '@douyinfe/semi-ui';
@@ -49,7 +50,7 @@ const PasswordResetForm = () => {
   const [countdown, setCountdown] = useState(30);
 
   const logo = getLogo();
-  const systemName = getSystemName();
+  const systemName = getSyncAPIDisplayName(getSystemName());
 
   useEffect(() => {
     let status = localStorage.getItem('status');

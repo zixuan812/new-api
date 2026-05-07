@@ -29,6 +29,7 @@ import {
   showSuccess,
   updateAPI,
   getSystemName,
+  getSyncAPIDisplayName,
   getOAuthProviderIcon,
   setUserData,
   onGitHubOAuthClicked,
@@ -114,7 +115,7 @@ const LoginForm = () => {
   const [customOAuthLoading, setCustomOAuthLoading] = useState({});
 
   const logo = getLogo();
-  const systemName = getSystemName();
+  const systemName = getSyncAPIDisplayName(getSystemName());
 
   let affCode = new URLSearchParams(window.location.search).get('aff');
   if (affCode) {

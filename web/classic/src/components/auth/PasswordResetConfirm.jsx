@@ -25,6 +25,7 @@ import {
   showNotice,
   getLogo,
   getSystemName,
+  getSyncAPIDisplayName,
 } from '../../helpers';
 import { useSearchParams, Link } from 'react-router-dom';
 import { Button, Card, Form, Typography, Banner } from '@douyinfe/semi-ui';
@@ -50,7 +51,7 @@ const PasswordResetConfirm = () => {
   const [formApi, setFormApi] = useState(null);
 
   const logo = getLogo();
-  const systemName = getSystemName();
+  const systemName = getSyncAPIDisplayName(getSystemName());
 
   useEffect(() => {
     let token = searchParams.get('token');

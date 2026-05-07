@@ -1,6 +1,7 @@
 import { Link } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 import { cn } from '@/lib/utils'
+import { getSyncAPIDisplayName } from '@/lib/branding'
 import { useStatus } from '@/hooks/use-status'
 import { useSystemConfig } from '@/hooks/use-system-config'
 import {
@@ -33,6 +34,7 @@ export function SystemBrand(props: SystemBrandProps) {
 
   const variant = props.variant ?? 'sidebar'
   const name = status?.system_name || props.defaultName || 'New API'
+  const displayName = getSyncAPIDisplayName(name)
   const version =
     status?.version || props.defaultVersion || t('Unknown version')
 
@@ -53,7 +55,7 @@ export function SystemBrand(props: SystemBrandProps) {
             className='size-full rounded-md object-cover'
           />
         </div>
-        <span className='max-w-[12rem] truncate'>{name}</span>
+        <span className='max-w-[12rem] truncate'>{displayName}</span>
       </Link>
     )
   }
@@ -74,7 +76,7 @@ export function SystemBrand(props: SystemBrandProps) {
             />
           </div>
           <div className='grid flex-1 text-start text-sm leading-tight group-data-[collapsible=icon]:hidden'>
-            <span className='truncate font-semibold'>{name}</span>
+            <span className='truncate font-semibold'>{displayName}</span>
             <span className='truncate text-xs'>{version}</span>
           </div>
         </SidebarMenuButton>
