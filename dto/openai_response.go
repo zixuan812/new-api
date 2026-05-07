@@ -240,6 +240,8 @@ type Usage struct {
 
 	// OpenRouter Params
 	Cost any `json:"cost,omitempty"`
+
+	TokenBillingMultiplierApplied bool `json:"-"`
 }
 
 type OpenAIVideoResponse struct {

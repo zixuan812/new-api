@@ -69,7 +69,10 @@ func xAIStreamHandler(c *gin.Context, info *relaycommon.RelayInfo, resp *http.Re
 
 	if !containStreamUsage {
 		usage = service.ResponseText2Usage(c, responseTextBuilder.String(), info.UpstreamModelName, info.GetEstimatePromptTokens())
-		usage.CompletionTokens += toolCount * 7
+		if toolCount > 0 {
+			usage.CompletionTokens += toolCount * 7
+			usage.TotalTokens = usage.PromptTokens + usage.CompletionTokens
+		}
 	}
 
 	helper.Done(c)

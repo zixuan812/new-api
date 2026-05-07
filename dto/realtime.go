@@ -43,6 +43,8 @@ type RealtimeUsage struct {
 	OutputTokens       int                `json:"output_tokens"`
 	InputTokenDetails  InputTokenDetails  `json:"input_token_details"`
 	OutputTokenDetails OutputTokenDetails `json:"output_token_details"`
+
+	TokenBillingMultiplierApplied bool `json:"-"`
 }
 
 type RealtimeSession struct {
