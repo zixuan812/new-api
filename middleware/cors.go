@@ -8,10 +8,17 @@ import (
 
 func CORS() gin.HandlerFunc {
 	config := cors.DefaultConfig()
-	config.AllowAllOrigins = true
+	config.AllowOrigins = []string{
+		"https://api.syncapi.dpdns.org",
+	}
 	config.AllowCredentials = true
-	config.AllowMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}
-	config.AllowHeaders = []string{"*"}
+	config.AllowMethods = []string{"GET", "POST" , "DELETE"}
+	config.AllowHeaders = []string{
+		"Content-Type", 
+		"Authorization",
+		"X-Request-Id",
+		"Accept",
+	}
 	return cors.New(config)
 }
 
