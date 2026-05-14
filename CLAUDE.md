@@ -163,4 +163,4 @@ Encoding Safety : On Windows PowerShell 5.1, never use bare Get-Content/Set-Cont
 
 **Do not save token for me, think as deep as you can to ensure no bugs going out.**
 
-**Claude Code and superviser would review your work after commit.**
+**Codex and superviser would review your work after commit.**

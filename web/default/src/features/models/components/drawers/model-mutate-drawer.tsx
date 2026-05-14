@@ -1271,7 +1271,15 @@ export function ModelMutateDrawer({
           >
             {t('Cancel')}
           </SheetClose>
-          <Button form='model-form' type='submit' disabled={isSubmitting}>
+          <Button
+            type='button'
+            disabled={isSubmitting}
+            onClick={() =>
+              form.handleSubmit(
+                onSubmit as Parameters<typeof form.handleSubmit>[0]
+              )()
+            }
+          >
             {isSubmitting && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
             {isEditing ? t('Update Model') : t('Save changes')}
           </Button>

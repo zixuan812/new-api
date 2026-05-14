@@ -291,7 +291,11 @@ export function RedemptionsMutateDrawer({
           <SheetClose render={<Button variant='outline' />}>
             {t('Close')}
           </SheetClose>
-          <Button form='redemption-form' type='submit' disabled={isSubmitting}>
+          <Button
+            type='button'
+            disabled={isSubmitting}
+            onClick={() => form.handleSubmit(onSubmit)()}
+          >
             {isSubmitting ? t('Saving...') : t('Save changes')}
           </Button>
         </SheetFooter>
